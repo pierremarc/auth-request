@@ -11,7 +11,7 @@ var md5sum = crypto.createHash('md5');
 var ENV = process.env;
 
 var mailTemplate = fs.readFileSync(ENV.AUTH_MAIL_TEMPLATE, {encoding:'UTF-8'});
-var tempalte = ejs.compile(mailTemplate);
+var template = ejs.compile(mailTemplate);
 
 // create reusable transport method (opens pool of SMTP connections)
 var smtpTransport = nodemailer.createTransport("SMTP",{
