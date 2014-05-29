@@ -3,7 +3,7 @@ var _ = require('underscore'),
 	Types = keystone.Field.Types;
 
 var fs = require('fs');
-var fs = require('ejs');
+var ejs = require('ejs');
 var nodemailer = require("nodemailer");
 var crypto = require('crypto');
 var md5sum = crypto.createHash('md5');
