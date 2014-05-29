@@ -2,29 +2,33 @@ var _ = require('underscore'),
 	keystone = require('keystone'),
 	Types = keystone.Field.Types;
 
+var fs = require('fs');
+var fs = require('ejs');
 var nodemailer = require("nodemailer");
 var crypto = require('crypto');
 var md5sum = crypto.createHash('md5');
 
 var ENV = process.env;
 
+var mailTemplate = fs.readFileSync(ENV.AUTH_MAIL_TEMPLATE, {encoding:'UTF-8'});
+var tempalte = ejs.compile(mailTemplate);
+
 // create reusable transport method (opens pool of SMTP connections)
 var smtpTransport = nodemailer.createTransport("SMTP",{
     service: "Gmail",
     auth: {
-        user: ENV.MAIL_USER,
-        pass: ENV.MAIL_PASSWORD
+        user: ENV.AUTH_MAIL_USER,
+        pass: ENV.AUTH_MAIL_PASSWORD
     }
 });
 
 function sendMail(grant){
     console.log('sendMail', grant.email, grant.path, grant.token);
     var mailOptions = {
-        from: ENV.MAIL_USER, 
-        to: grant.email, 
-        subject: "made.in document", 
-        text: "http://pdocuments.made.net.in" + grant.path+'?t='+grant.token , 
-    //     html: "<b>Hello world ✔</b>" 
+        from: ENV.AUTH_MAIL_USER,
+        to: grant.email,
+        subject: "[made.in] document request",
+        text: template(grant),
     }
     
     smtpTransport.sendMail(mailOptions, function(error, response){
