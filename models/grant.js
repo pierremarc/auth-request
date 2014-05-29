@@ -27,7 +27,7 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 function sendMail(grant){
     console.log('sendMail', grant.email, grant.path, grant.token);
     var mailOptions = {
-        from: ENV.AUTH_MAIL_USER,
+        from: ENV.AUTH_MAIL_FROM,
         to: grant.email,
         subject: "[made.in] document request",
         text: template(grant),
