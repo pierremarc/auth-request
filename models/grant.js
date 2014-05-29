@@ -15,7 +15,9 @@ var tempalte = ejs.compile(mailTemplate);
 
 // create reusable transport method (opens pool of SMTP connections)
 var smtpTransport = nodemailer.createTransport("SMTP",{
-    service: "Gmail",
+    host: ENV.AUTH_MAIL_SMTP_HOST,
+    port: ENV.AUTH_MAIL_SMTP_PORT,
+    secureConnection: ENV.AUTH_MAIL_SMTP_SECURE ? true : false,
     auth: {
         user: ENV.AUTH_MAIL_USER,
         pass: ENV.AUTH_MAIL_PASSWORD
