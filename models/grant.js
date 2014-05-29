@@ -17,7 +17,7 @@ var template = ejs.compile(mailTemplate);
 var smtpTransport = nodemailer.createTransport("SMTP",{
     host: ENV.AUTH_MAIL_SMTP_HOST,
     port: ENV.AUTH_MAIL_SMTP_PORT,
-    secureConnection: ENV.AUTH_MAIL_SMTP_SECURE ? true : false,
+//     secureConnection: ENV.AUTH_MAIL_SMTP_SECURE ? true : false,
     auth: {
         user: ENV.AUTH_MAIL_USER,
         pass: ENV.AUTH_MAIL_PASSWORD
