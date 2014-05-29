@@ -1,0 +1,12 @@
+extends ../layouts/default
+block css
+    link(href="/styles/site.min.css", rel="stylesheet")
+
+block content
+    .container: .jumbotron
+        .filer
+                
+block js
+    script var dirs = !{JSON.stringify(dirs)}
+    script(src="/js/lib/underscore-min.js")
+    script(src="/js/ftppass.js")
